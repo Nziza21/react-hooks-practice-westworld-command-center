@@ -1,18 +1,22 @@
+// Host.js
 import React from "react";
-import { Card } from "semantic-ui-react";
-import "../stylesheets/Host.css";
+import { Card, Image } from "semantic-ui-react";
 
-function Host() {
-  /* NOTE: The className "host selected" renders a different style than simply "host". */
+const Host = ({ host, onSelect, onMove }) => {
   return (
     <Card
-      className="host selected"
-      onClick={/* On Click what? */ null}
-      image={/* I wonder what goes here...*/ ""}
-      raised
-      link
-    />
+      // Add conditional classNames for styling based on host's state
+      className={host.isSelected ? "selected" : ""}
+      onClick={onSelect}
+    >
+      <Image src={host.imageUrl} alt={host.name} />
+      <Card.Content>
+        <Card.Header>{host.name}</Card.Header>
+      </Card.Content>
+    </Card>
   );
-}
+};
 
 export default Host;
+
+

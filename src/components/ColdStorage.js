@@ -1,14 +1,22 @@
 import React from "react";
-import { Segment } from "semantic-ui-react";
+import { Segment, Card } from "semantic-ui-react";
 
-function ColdStorage() {
+function ColdStorage({ hosts }) {
   return (
     <Segment.Group className="HQComps">
       <Segment compact>
-        <h3 className="labels">ColdStorage</h3>
+        <h3 className="labels">Cold Storage</h3>
       </Segment>
       <Segment compact>
-        {/* Cold Storage contains hosts....but how? Directly? Or is there something else we could use to contain them... */}
+        <Card.Group>
+          {hosts.map((host) => (
+            <Card key={host.id}>
+              <Card.Content>
+                <Card.Header>{host.name}</Card.Header>
+              </Card.Content>
+            </Card>
+          ))}
+        </Card.Group>
       </Segment>
     </Segment.Group>
   );

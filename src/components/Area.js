@@ -1,30 +1,31 @@
+// Area.js
 import React from "react";
-import "../stylesheets/Area.css";
+import { Card } from "semantic-ui-react";
+import Host from "./Host";  
 
-function Area() {
+const Area = ({ area, hosts, onSelectHost, onMoveHost }) => {
   return (
-    <div
-      className="area"
-      id={
-        /* Pass in the area name here to make sure this is styled correctly */ "id"
-      }
-    >
-      <h3 className="labels">
-        {/* Don't just pass in the name from the data...clean that thing up */}
-      </h3>
-      {/* See Checkpoint 1 item 2 in the Readme for a clue as to what goes here */}
-    </div>
-  );
-}
+    <Card.Group>
+      {/* Render area information */}
+      <Card>
+        <Card.Content>
+          <Card.Header>{area.name}</Card.Header>
+          {/* Add more area information here if needed */}
+        </Card.Content>
+      </Card>
 
-Area.propTypes = {
-  hosts: function (props) {
-    if (props.hosts.length > props.limit) {
-      throw Error(
-        `HEY!! You got too many hosts in ${props.name}. The limit for that area is ${props.limit}. You gotta fix that!`
-      );
-    }
-  },
+      {/* Render Hosts in this Area */}
+      {hosts.map((host) => (
+        <Host
+          key={host.id}
+          host={host}
+          onSelect={() => onSelectHost(host.id)}
+          onMove={(newArea) => onMoveHost(host.id, newArea)}
+        />
+      ))}
+    </Card.Group>
+  );
 };
 
 export default Area;
+
